@@ -3,7 +3,7 @@ import clsx from "clsx";
 import React from "react";
 
 interface IProps {
-  variant?: "primary" | "secondary" | "ghost" | "danger";
+  variant?: "primary" | "secondary" | "ghost" | "danger" | "outline";
   shape?: "chip" | "rectangle" | "pill";
   size?: "default" | "sm" | "lg" | "icon";
 }
@@ -33,23 +33,34 @@ const Button = forwardRef<Ref, ButtonProps>((props, ref) => {
   };
   const sizeVariant = {
     default: "h-9 px-4 py-2",
-    sm: "h-8 rounded-md px-3 text-xs",
+    sm: "h-8 rounded-md px-3 ",
     lg: "h-10 rounded-md px-8",
     icon: "h-9 w-9",
   };
 
   const variantOptions = {
-    primary: clsx(`inline-flex items-center justify-center  bg-blue-500 text-white text-sm`),
-    secondary: clsx(`inline-flex items-center justify-center  bg-purple-500 text-white text-sm`),
-    ghost: clsx(`inline-flex items-center justify-center  text-black bg-gray-100 text-sm`),
-    danger: clsx(`inline-flex items-center justify-center  text-red-500 bg-red-100 text-sm`),
+    primary: clsx(
+      `flex items-center cursor-pointer justify-center text-xs duration-100 delay-100 bg-blue-500 hover:bg-blue-600 text-gray-100 ease-in-out  `
+    ),
+    secondary: clsx(
+      `flex items-center cursor-pointer justify-center font-medium text-xs duration-100 delay-100 hover:bg-purple-400  bg-purple-500 text-white `
+    ),
+    outline: clsx(
+      `flex items-center cursor-pointer justify-center font-medium text-xs duration-100 delay-100  bg-transparent border border-gray-300 hover:border-slate-200 hover:border-2 text-white `
+    ),
+    ghost: clsx(
+      `flex items-center cursor-pointer justify-center text-black font-medium text-xs duration-100 delay-100 hover:bg-[#737373] hover:text-white `
+    ),
+    danger: clsx(
+      `flex items-center cursor-pointer justify-center font-medium text-xs duration-100 delay-100 text-red-500 bg-red-200 hover:bg-red-100 `
+    ),
   };
 
   return (
     <button
       ref={ref}
       type={type}
-      className={clsx(variantOptions[variant], sizeVariant[size], shapeVariant[shape], className)}
+      className={clsx(className, variantOptions[variant], sizeVariant[size], shapeVariant[shape])}
       {...rest}
     >
       {children}
